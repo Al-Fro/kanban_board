@@ -1,0 +1,9 @@
+.container 
+  .row.mt-5
+    .col-4 
+    .col-4
+      = simple_form_for @board, url: [:boards] do |f|
+        = f.input :name
+
+        = f.submit 'Create board', class: 'btn btn-primary mt-3'
+    .col-4
