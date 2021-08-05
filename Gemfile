@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap'
+gem 'rexml'
 gem 'simple_form'
 gem 'slim-rails'
 
@@ -32,6 +33,8 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
+  gem 'factory_bot_rails'
+  gem 'minitest-reporters'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end

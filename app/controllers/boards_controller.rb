@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new permitted_params
-    @board.secure_id = SecureRandom.base64(10)
+    @board.secure_id = SecureRandom.hex(5)
 
     unless @board.save
       render :new
