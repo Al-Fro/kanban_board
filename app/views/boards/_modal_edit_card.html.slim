@@ -6,7 +6,7 @@
           = 'Edit card'
       .modal-body
         = simple_form_for card, url: [board, list, card] do |f|
-          = f.input :title, wrapper_html: { class: 'mb-4'}
+          = f.input :title, wrapper_html: { class: 'mb-4'}, input_html: {id: 'card_edit'}
           = f.association :list, include_blank: false, collection: board.lists
 
           = f.submit 'Update card', class: 'btn btn-primary mt-5 float-end'

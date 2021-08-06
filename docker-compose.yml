@@ -31,6 +31,11 @@ services:
     volumes:
       - .:/app
       - bundle_cache:/usr/local/bundle
+  selenium:
+    image: selenium/standalone-chrome-debug:3.0.1-germanium
+    ports: ['4444:4444', '5900:5900']
+    logging:
+      driver: none
 
 volumes:
   bundle_cache: 
