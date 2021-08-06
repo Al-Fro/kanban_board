@@ -33,10 +33,10 @@ class BoardsTest < ApplicationSystemTestCase
 
   test 'update card title' do
     card = create(:card, :with_list)
-    
+
     visit board_path(card.list.board.secure_id)
 
-    find('a', id: "#{card.id}").click
+    find('a', id: card.id.to_s).click
 
     assert_text 'Edit card'
 
@@ -51,16 +51,16 @@ class BoardsTest < ApplicationSystemTestCase
 
   test 'update card list' do
     board = create(:board)
-    
+
     10.times { create(:list, board_id: board.id) }
 
     card = create(:card, list_id: List.first.id)
-    
+
     visit board_path(board.secure_id)
 
-    find('a', id: "#{card.id}").click
+    find('a', id: card.id.to_s).click
 
-    select("#{List.last.title}", from: 'card_list_id')
+    select(List.last.title.to_s, from: 'card_list_id')
 
     click_on 'Update card'
 
