@@ -7,7 +7,7 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
 
     post board_lists_path(board), params: {list: {title: list.title}}
 
-    assert_response :redirect
+    assert_response :no_content
     assert List.find_by(title: list.title, board_id: board.id)
   end
 
@@ -16,7 +16,7 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
 
     delete board_list_path(list.board, list)
 
-    assert_response :redirect
+    assert_response :no_content
     assert_not List.find_by(id: list.id)
   end
 end
