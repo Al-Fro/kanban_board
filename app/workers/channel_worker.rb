@@ -4,6 +4,6 @@ class ChannelWorker < BaseWorker
 
     html = ApplicationController.render partial: 'boards/board_container', locals: {board: board}
 
-    ActionCable.server.broadcast 'board_channel', html
+    ActionCable.server.broadcast "board_channel_#{board_id}", html
   end
 end

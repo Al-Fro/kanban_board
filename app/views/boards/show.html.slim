@@ -1,5 +1,5 @@
-.card 
+.card id='board_id' data-board-id="#{board.id}"
   .card-header 
-    = board.name
+    h4 = "Board: #{board.name}"
   .card-body.d-flex.flex-row.overflow-auto id='board-container'
     = render 'boards/board_container', board: board
