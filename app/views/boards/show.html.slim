@@ -1,30 +1,5 @@
 .card 
   .card-header 
-    = @board.name
-  .card-body.d-flex.flex-row.overflow-auto
-      - @board.lists.each do |list|
-        .col-2.me-2
-          .card
-            .card-header 
-              = list.title
-              = small_delete_button([@board, list])
-            .card-body.d-flex.flex-column 
-              - list.cards.each do |card|
-                = render 'boards/modal_edit_card', card: card, list: list
-                .card.mb-2
-                  .card-body 
-                    = "Title: #{card.title}"
-                    = small_delete_button([@board, list, card])
-                    = link_to '&#9998;'.html_safe, '#',
-                                                   class: 'btn btn-outline-info btn-sm float-end me-1',
-                                                   'data-bs-toggle': "modal",
-                                                   'data-bs-target': "#editCardModal#{card.id}"
-              = simple_form_for :card, url: [@board, list, :cards] do |f|
-                = f.input :title, label: false
-                = f.submit 'Add new card', class: 'btn btn-secondary mt-1 float-end'
-
-      .col-2
-        = simple_form_for :list, url: [@board, :lists] do |f|
-          = f.input :title, label: false
-  
-          = f.submit 'Create new list', class: 'btn btn-primary mt-1 float-end'
+    = board.name
+  .card-body.d-flex.flex-row.overflow-auto id='board-container'
+    = render 'boards/board_container', board: board

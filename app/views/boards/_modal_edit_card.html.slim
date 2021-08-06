@@ -1,12 +1,12 @@
-.modal.fade[tabindex="-1" role="dialog" id="editCardModal#{card.id}" data-show='true']
+.modal.fade[tabindex="-1" role="dialog" id="editCardModal#{card.id}" data-bs-backdrop='false']
   .modal-dialog
     .modal-content
       .modal-header
         h5.modal-title
           = 'Edit card'
       .modal-body
-        = simple_form_for card, url: [@board, list, card] do |f|
+        = simple_form_for card, url: [board, list, card] do |f|
           = f.input :title, wrapper_html: { class: 'mb-4'}
-          = f.association :list, include_blank: false, collection: @board.lists
+          = f.association :list, include_blank: false, collection: board.lists
 
           = f.submit 'Update card', class: 'btn btn-primary mt-5 float-end'

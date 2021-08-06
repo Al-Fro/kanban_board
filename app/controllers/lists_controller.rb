@@ -1,23 +1,19 @@
 class ListsController < ApplicationController
   def create
-    board = Board.find(params[:board_id])
-
     @list = List.new permitted_params
-    @list.board_id = board.id
+    @list.board_id = params[:board_id]
 
     @list.save!
 
-    redirect_to "/boards/#{board.secure_id.to_sym}"
+    ChannelWorker.perform_async(params[:board_id])
   end
 
   def destroy
-    board = Board.find(params[:board_id])
-
     @list = List.find(params[:id])
 
     @list.destroy!
 
-    redirect_to "/boards/#{board.secure_id.to_sym}"
+    ChannelWorker.perform_async(params[:board_id])
   end
 
   private

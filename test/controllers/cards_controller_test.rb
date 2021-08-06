@@ -7,7 +7,7 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
 
     post board_list_cards_path(list.board, list), params: {card: {title: card.title}}
 
-    assert_response :redirect
+    assert_response :no_content
     assert Card.find_by(title: card.title, list_id: list.id)
   end
 
@@ -17,7 +17,7 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
 
     patch board_list_card_path(card.list.board, card.list, card), params: {card: {title: '123', list_id: list.id}}
 
-    assert_response :redirect
+    assert_response :no_content
     assert Card.find_by(id: card.id, title: '123', list_id: list.id)
   end
 
@@ -26,7 +26,7 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
 
     delete board_list_card_path(card.list.board, card.list, card)
 
-    assert_response :redirect
+    assert_response :no_content
     assert_not Card.find_by(id: card.id)
   end
 end
