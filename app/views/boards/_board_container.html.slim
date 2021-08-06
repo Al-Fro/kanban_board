@@ -14,7 +14,8 @@
               = link_to '&#9998;'.html_safe, '#',
                                              class: 'btn btn-outline-info btn-sm float-end me-1',
                                              'data-bs-toggle': "modal",
-                                             'data-bs-target': "#editCardModal#{card.id}"
+                                             'data-bs-target': "#editCardModal#{card.id}",
+                                             'id': "#{card.id}"
         = simple_form_for :card, url: [board, list, :cards] do |f|
           = f.input :title, label: false
           
