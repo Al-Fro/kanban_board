@@ -12,6 +12,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert Board.find_by(name: board.name)
   end
 
+  test 'should not create' do
+    post boards_path, params: {board: {name: nil}}
+
+    assert_response :success
+    assert Board.count.zero?
+  end
+
   test 'should get show' do
     board = create(:board)
     board.secure_id = SecureRandom.hex(5)

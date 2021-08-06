@@ -3,7 +3,7 @@ class ListsController < ApplicationController
     @list = List.new permitted_params
     @list.board_id = params[:board_id]
 
-    @list.save!
+    return_to_back(@list) unless @list.save
 
     ChannelWorker.perform_async(params[:board_id])
   end
@@ -11,7 +11,7 @@ class ListsController < ApplicationController
   def destroy
     @list = List.find(params[:id])
 
-    @list.destroy!
+    return_to_back(@list) unless @list.destroy
 
     ChannelWorker.perform_async(params[:board_id])
   end

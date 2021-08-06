@@ -7,7 +7,7 @@ class BoardsController < ApplicationController
     @board = Board.new permitted_params
     @board.secure_id = SecureRandom.hex(5)
 
-    render :new unless @board.save
+    return render :new unless @board.save
 
     redirect_to "/boards/#{@board.secure_id.to_sym}"
   end

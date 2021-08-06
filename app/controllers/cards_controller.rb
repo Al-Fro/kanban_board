@@ -3,7 +3,7 @@ class CardsController < ApplicationController
     @card = Card.new permitted_params
     @card.list_id = params[:list_id]
 
-    @card.save!
+    return_to_back(@card) unless @card.save
 
     ChannelWorker.perform_async(params[:board_id])
   end
@@ -11,7 +11,7 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
 
-    @card.update! permitted_params
+    return_to_back(@card) unless @card.update permitted_params
 
     ChannelWorker.perform_async(params[:board_id])
   end
@@ -19,7 +19,7 @@ class CardsController < ApplicationController
   def destroy
     @card = Card.find(params[:id])
 
-    @card.destroy!
+    return_to_back(@card) unless @card.destroy
 
     ChannelWorker.perform_async(params[:board_id])
   end
