@@ -10,11 +10,10 @@ services:
 
   web:
     restart: always
-    build: .
+    image: 901276595/kanban-board
     command: bash -c "./bin/webpack && bundle exec puma -C config/puma.rb"
     environment:
       - RAILS_ENV=production
-      - RAILS_LOG_TO_STDOUT=true
       - RAILS_SERVE_STATIC_FILES=true
     volumes:
       - .:/app
@@ -32,7 +31,7 @@ services:
       - 6379:6379
   sidekiq:
     restart: always
-    build: .
+    image: 901276595/kanban-board
     command: bundle exec sidekiq
     depends_on:
       - redis
