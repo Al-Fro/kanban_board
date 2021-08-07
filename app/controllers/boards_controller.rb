@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
 
     return render :new unless @board.save
 
-    redirect_to "/boards/#{@board.secure_id.to_sym}"
+    redirect_to "/boards/#{@board.secure_id}"
   end
 
   def show

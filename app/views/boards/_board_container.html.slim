@@ -17,12 +17,14 @@
                                              'data-bs-target': "#editCardModal#{card.id}",
                                              'id': "#{card.id}"
         = simple_form_for :card, url: [board, list, :cards] do |f|
+          = f.input :list_id, as: :hidden, input_html: {value: list.id}
           = f.input :title, label: false
           
-          = f.submit 'Add new card', class: 'btn btn-secondary mt-1 float-end'
+          = f.submit 'Add new card', class: 'btn btn-secondary mt-1'
 
 .col-2
   = simple_form_for :list, url: [board, :lists] do |f|
+    = f.input :board_id, as: :hidden, input_html: {value: board.id}
     = f.input :title, label: false
 
     = f.submit 'Create new list', class: 'btn btn-primary mt-1 float-end'

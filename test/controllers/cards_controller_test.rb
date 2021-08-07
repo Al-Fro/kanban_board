@@ -5,7 +5,7 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
     list = create(:list, :with_board)
     card = build(:card)
 
-    post board_list_cards_path(list.board, list), params: {card: {title: card.title}}
+    post board_list_cards_path(list.board, list), params: {card: {title: card.title, list_id: list.id}}
 
     assert_response :no_content
     assert Card.find_by(title: card.title, list_id: list.id)
