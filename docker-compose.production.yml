@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  db:
+    restart: always
+    image: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  web:
+    restart: always
+    build: .
+    command: bash -c "./bin/webpack && bundle exec puma -C config/puma.rb"
+    environment:
+      - RAILS_ENV=production
+      - RAILS_LOG_TO_STDOUT=true
+      - RAILS_SERVE_STATIC_FILES=true
+    volumes:
+      - .:/app
+      - ~/.bash_history:/root/.bash_history
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+  redis:
+    restart: always
+    image: redis:5
+    ports:
+      - 6379:6379
+  sidekiq:
+    restart: always
+    build: .
+    command: bundle exec sidekiq
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    environment:
+      - RAILS_ENV=production
+
+volumes:
+  bundle_cache: 
+  db_data:

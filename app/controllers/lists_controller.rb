@@ -1,7 +1,6 @@
 class ListsController < ApplicationController
   def create
     @list = List.new permitted_params
-    @list.board_id = params[:board_id]
 
     return_to_back(@list) unless @list.save
 
@@ -19,6 +18,6 @@ class ListsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, :board_id)
   end
 end

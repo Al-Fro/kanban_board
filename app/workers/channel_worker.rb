@@ -1,4 +1,6 @@
 class ChannelWorker < BaseWorker
+  sidekiq_options retry: 1
+
   def perform(board_id)
     board = Board.find(board_id)
 

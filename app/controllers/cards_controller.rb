@@ -1,7 +1,6 @@
 class CardsController < ApplicationController
   def create
     @card = Card.new permitted_params
-    @card.list_id = params[:list_id]
 
     return_to_back(@card) unless @card.save
 
